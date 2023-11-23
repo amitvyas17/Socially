@@ -50,6 +50,7 @@ exports.getTimeline = async (req, res, next) => {
             subBtn: 'Logout',
             message: '',
             posts: [],
+            loggedInUser:''
         });
     }
 
