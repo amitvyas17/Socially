@@ -1,0 +1,46 @@
+.card{
+    width: 20rem;
+}
+.friendBox{
+   padding: 0;
+   margin-right: 2rem;
+   margin-bottom: 1rem;
+}
+.card{
+    font-size: x-small;
+}
+.card-title{
+    font-size: medium;
+}
+.card-body{
+    padding: 0.3rem 1rem 0.4rem 0.8rem;
+}
+.userName{
+    margin-top: 1rem;
+}
+.rounded-image{
+    margin-top: 0.2rem;
+}
+.centerDiv {
+    /* Other styles remain unchanged */
+    /* margin-left: 18rem; Remove or adjust this line */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+main{
+    background-color: #F5F5F5;
+    height: 100vh;
+}
+.borderless-btn {
+    border: none;
+    background: none;
+    padding: 0; /* Remove padding if needed */
+    cursor: pointer;
+    font-size: medium;
+  }
+.remove-friend-div{
+    align-self: flex-end;
+    justify-content: space-between;
+}
+  

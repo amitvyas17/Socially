@@ -1,0 +1,217 @@
+.customBtn{
+    /* border: 1px solid white; */
+    color: black;
+    border: none;
+    background-color: transparent;
+
+}
+a{
+    text-decoration: none;
+}
+.customBtn:hover{
+    color: #FF1E57;
+}
+
+
+.customA{
+    color: white;
+}
+.customA2{
+    text-decoration: none;
+
+}
+main{
+    background-color: #F5F5F5;
+    height: 100%;
+}
+/* Custom CSS in your stylesheet */
+.custom-navbar-bg {
+    background-color: rgb(163,236,253); /* Example color: Orange */
+    background-image: linear-gradient(90deg, rgba(163,236,253,1) 0%, rgba(198,150,252,1) 100%);
+    height: 3.8rem;
+}
+.leftDiv{
+    /* border: 2px solid black; */
+    width: 15rem;
+    height: 35rem;
+}
+.centerDiv{
+    /* border: 2px solid black; */
+    width: 40rem;
+    margin-left: 18rem;
+    /* margin-left: 270px;
+     */
+     /* position: fixed; */
+    /* height: 35rem; */
+}
+/* Make the custom CSS more specific */
+
+.rounded-image{
+    border-radius: 50%;
+}
+.cardProfile{
+width: 10rem;
+}
+.italic-text {
+    font-style: italic;
+}
+.required-field {
+    color: red;
+    margin-left: 5px; /* Add spacing between the label and the star */
+}
+
+
+.dropdown-menu .customA {
+    color: black;
+}
+.nav-item {
+    list-style-type: none; /* Remove the list-style decoration */
+}
+.navbar .nav-item.dropdown .dropdown-menu {
+    min-width: 100px; /* Adjust the width as needed */  
+}
+.noti-icon {
+    position: relative;
+    margin-top: 0.4rem;
+    font-size: 20px;
+}
+.user-icon{
+    position: relative;
+    margin-top: 0.1rem;
+    font-size: 20px; 
+}
+
+.notification-dot {
+    position: absolute;
+    top: -6px;
+    right: -4px;
+    width: 10px;
+    height: 10px;
+    background-color: red; /* You can change the color as needed */
+    border-radius: 50%;
+    animation: blink 1.8s infinite; /* Adjust the animation duration as needed */
+    display: none;
+}
+
+@keyframes blink {
+    0%, 50%, 100% {
+        opacity: 0;
+    }
+    25%, 75% {
+        opacity: 1;
+    }
+}
+
+/* Add a class to show the dot when there's a new notification */
+.has-notification .notification-dot {
+    display: block;
+}
+
+.search-container {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    margin-left:7rem;
+  }
+  
+  .search-btn {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    margin-left: -40px; /* Adjust this value to position the button as desired */
+  }
+  
+  /* Disable the clear (cross) icon in the input */
+  .form-control::-webkit-search-cancel-button,
+  .form-control::-webkit-search-clear-button {
+    display: none;
+  }
+  .no-notifications-message {
+    font-size: 24px;
+    color: #888; /* Customize the text color */
+    text-align: center;
+    margin: 20px 0; /* Adjust the margin as needed */
+    /* Add any other CSS styles you want for this message */
+  }
+  
+  .deleteDiv{
+    margin-left: 9rem;
+  }
+  .deleteButton {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.8rem;
+    margin-bottom: 4rem;
+    /* Add any additional styling as needed */
+}
+
+.logo-text {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin-left: 1rem;
+}
+
+.black-text {
+    color: black;
+    margin-right: 0; /* Eliminate margin */
+    padding-right: 0; /* Eliminate padding */
+}
+
+.green-text {
+    color: #FF1E57;
+    margin-left: -0.4rem;
+}
+/* Remove focus box from Bootstrap dropdown */
+.nav-item.dropdown:focus {
+    outline: none;
+}
+
+.nav-link{
+    color: black;
+}
+/* Remove focus box from dropdown links */
+.nav-link:focus, .nav-link:hover {
+    color: #FF1E57;
+    background-color: transparent;
+}
+.main-content{
+    margin-left: 4rem;
+}
+
+.card {
+    border-radius: 40px; /* Adjust the value as needed */
+}
+.card-header{
+    border-radius: 40px;
+    padding-top: 1.5rem;
+    background-color: transparent;
+
+}
+.card-footer{
+    background-color: transparent;
+
+}
+.btn-transparent {
+    border: none;
+    background-color: transparent;
+}
+
+.fa-bookmark{
+    color: black
+}
+.fas.fa-heart{
+    color: #FF1E57;
+}
+.media{
+    justify-content: space-between;
+}
+
+.navbar .nav-item.dropdown .dropdown-menu {
+min-width: 141px;
+font-size: x-small;
+
+}
+
+
+

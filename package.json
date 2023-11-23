@@ -1,0 +1,27 @@
+{
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "connect-flash": "^0.1.1",
+    "connect-mongodb-session": "^3.1.1",
+    "crypto": "^1.0.1",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "mongoose": "^7.5.3",
+    "nodemailer": "^6.9.7"
+  },
+  "name": "socially-prarambh",
+  "version": "1.0.0",
+  "description": "A social media app",
+  "main": "app.js",
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "scripts": {
+    "start": "nodemon app.js ",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Amit Vyas",
+  "license": "ISC"
+}

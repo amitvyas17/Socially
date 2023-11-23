@@ -1,0 +1,172 @@
+<%- include('../includes/start.ejs') %>
+<link href="/css/post-view.css" rel="stylesheet">
+
+            <main>
+                    <div class="centerDiv ms-2 mt-1 mb-3">
+                        <div class="container mt-5 mb-2 ">
+                            <div class="row justify-content-center">
+                                <div class="col-md-12 col-post-view">
+                                    <!-- Create Post Form -->
+
+                                    <div class="card  mb-2 mt-4">
+                                        <!-- Post Header (User Profile) -->
+
+                                        <div class="card-header">
+
+                                            <div class="media d-flex">
+
+                                                <!-- <img src="profile-image.jpg" alt="Profile Picture" class="mr-3 rounded-circle" width="50"> -->
+                                                <div class=" mt-1 ">
+                                                    <div class="headingDiv">
+                                                        <h5 class="mt-0">
+                                                            <img src="<%=post.userId.imagePath%>" class="rounded-image" alt="..." width="50px" height="50px">
+                                                            <%=post.userId.firstName%>
+                                                            <%=post.userId.lastName%>
+
+                                                        </h5>
+                                                        <p class="text-muted">
+                                                            <% 
+                                                            const postDate = new Date(post.createdAt);
+                                                            const currentDate = new Date();
+                                                            
+                                                            // Check if the post was created on the same day
+                                                            if (postDate.toDateString() === currentDate.toDateString()) {
+                                                                const timeDifference = Math.floor((currentDate - postDate) / (60 * 1000)); // in minutes
+                                                                const formattedTime = timeDifference < 60
+                                                                    ? `${timeDifference} minutes ago`
+                                                                    : `${Math.floor(timeDifference / 60)} hours ago`;
+                                            
+                                                                %> <%= formattedTime %> <% 
+                                                            } else {
+                                                                // If the post is older, display the full date and time in the local time zone
+                                                                const options = {year: 'numeric', month: 'long', day: 'numeric' };
+                                                                const formattedDate = postDate.toLocaleDateString('en-US', options);
+                                                                
+                                                                %> <%= formattedDate %> <% 
+                                                            }
+                                                             %>
+                                                        </p>
+                                                    </div>
+
+                                                </div>
+                                                <form method="POST" action="/delete-post">
+                                                    <button type="submit" class="deleteButton">
+                                                        <input type="hidden" name="userId" value="<%=post.userId._id%>">
+                                                        <input type="hidden" name="postId" value="<%=post._id%>">
+                                                        <div class="deleteDiv">
+                                                            <i class="fa-solid fa-trash"></i>
+                                                        </div>
+                                                    </button>
+                                                </form>
+
+                                            </div>
+                                        </div>
+
+                                        <!-- Post Content -->
+
+                                        <div class="card-body ">
+                                            <p class="card-text">
+                                                <%=post.postText%>
+                                            </p>
+                                            <div class="uploadImage ms-3">
+                                                <img src="<%=post.postImage%>" alt="Post Image" class="img-fluid ms-5"
+                                                    width="400px">
+                                            </div>
+                                        </div>
+
+                                        <!-- Post Footer (Like, Comment, Share Buttons) -->
+                                        <!-- Post Footer (Like, Comment, Share Buttons) -->
+                                        <div class="card-footer footer-post-view">
+                                            <div class="d-flex align-items-center">
+                                                <p class="me-2">Likes:<%=post.likes %>
+                                                </p>
+                                                <p>Comments:
+                                                  <% if (post.comments.length) { %>
+                                                    <%= post.comments.length %>
+                                                      <% } else { %>
+                                                       0
+                                                        <% } %>
+                                                </p>
+                                              </div>
+                                            <!-- Like form -->
+                                            <div class="d-flex">
+                                                <% if(isLikedByUser){ %>
+                                                  <form method="POST" action="/dislike-post">
+                                                    <input type="hidden" name="postId" value="<%=post._id%>">
+                                                    <input type="hidden" name="redirectPage" value="/post-view/<%=post._id%>">
+                                                    <button id="likeBtn" type="submit"
+                                                      class="liked btn-lg  btn-icon btn-transparent"><i
+                                                        class="fas like-icon fa-heart"></i></button>
+                                                  </form>
+                                                  <% } else { %>
+                                                    <form method="POST" action="/like-post">
+                                                      <input type="hidden" name="postId" value="<%=post._id%>">
+                                                      <input type="hidden" name="redirectPage" value="/post-view/<%=post._id%>">
+                                                      <button id="dislikeBtn" type="submit"
+                                                        class=" btn-lg   btn-icon btn-transparent"><i
+                                                          class="far fa-heart"></i></button>
+                                                    </form>
+                                                    <% } %>
+                                                      
+                                                      <% if(isSavedByUser){ %>
+                                                        <form action="/remove-save-post" method="POST">
+                                                          <input type="hidden" name="postId" value="<%=post._id%>">
+                                                          <input type="hidden" name="redirectPage" value="/post-view/<%=post._id%>">
+                                                          <button type="submit"
+                                                            class=" btn-lg btn-lg saved btn-icon btn-transparent"><i
+                                                              class="fas fa-bookmark"></i></button>
+                                                        </form>
+                                                        <% } else { %>
+                                                          <form action="/save-post" method="POST">
+                                                            <input type="hidden" name="postId" value="<%=post._id%>">
+                                                            <input type="hidden" name="redirectPage" value="/post-view/<%=post._id%>">
+                                                            <button type="submit" class="me-1 btn-lg btn-icon btn-transparent"><i
+                                                                class="far fa-bookmark"></i></button>
+                                                          </form>
+                                                          <% } %>
+                                            </div>
+                                            <!-- Comment form -->
+                                            <form method="POST" action="/add-comment">
+                                                <div class="mb-2">
+                                                    <label for="comment" class="form-label">Add a Comment:</label>
+                                                    <textarea class="form-control" id="comment" name="comment" rows="3"
+                                                        required></textarea>
+                                                </div>
+                                                <input type="hidden" name="postId" value="<%=post._id%>">
+                                                <button type="submit" class="btn btn-primary btn-sm mr-2">Add
+                                                    Comment</button>
+                                            </form>
+
+                                            <!-- View old comments -->
+                                            <div class="mt-2">
+                                                <h5>Old Comments:</h5>
+                                                <ul class="list-group">
+                                                    <% if (post.comments && post.comments.length> 0) { %>
+                                                        <% post.comments.forEach(function(comment) { %>
+                                                            <li class="list-group-item"><strong>
+                                                                    <%= comment.userId.firstName %>
+                                                                    <%= comment.userId.lastName %> :
+                                                                </strong>
+                                                                <%= comment.text %>
+                                                            </li>
+                                                            <% }); %>
+                                                                <% } else { %>
+                                                                    <li class="list-group-item">No comments yet.</li>
+                                                                    <% } %>
+                                                </ul>
+                                            </div>
+
+                                            <!-- <a href="/post-view/<%= post._id %>" class="btn btn-primary btn-sm mr-2">Comment</a> -->
+                                            <!-- <button class="btn btn-primary btn-sm">Share</button> -->
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+            </main>
+                <%- include('../includes/end.ejs') %>

@@ -1,0 +1,72 @@
+
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="css/signup.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Login Page</title>
+</head>
+<body>
+
+    <main>
+      
+   
+        <div class="signup-parent mt-5 d-flex justify-content-center align-items-center">
+        <div class="signup" >
+            <img  id="signup-image" src="image/verticalLogo.png" width="220px" height="200px">
+
+            <form class="g-3 needs-validation" method="post" action="/signup">
+              <div class="row">
+                  <div class="col-md-6">
+                      <input type="text" name="firstName" class="form-control input-box" placeholder="First Name" id="validationTooltip01" required>
+                  </div>
+                  <div class="col-md-6">
+                      <input type="text" name="lastName" class="form-control input-box" placeholder="Last Name" id="validationTooltip02" required>
+                  </div>
+              </div>
+          
+              <div class="row">
+                  <div class="col-md-6">
+                      <input type="email" name="email" class="form-control input-box" placeholder="Email" id="validationTooltip03" required>
+                  </div>
+                  <div class="col-md-6">
+                      <input type="password" name="password" class="form-control input-box" placeholder="Password" id="password" required>
+                  </div>
+              </div>
+          
+              <div class="row">
+                  <div class="col-md-6">
+                      <input type="password" name="confirmPassword" placeholder="Confirm Password" class="form-control input-box" id="confirmPassword" required>
+                  </div>
+                  <div class="col-md-6">
+                      <select class="form-select input-box" name="gender" id="validationTooltip04" required>
+                          <option selected disabled value="">Gender...</option>
+                          <option value="Male">Male</option>
+                          <option value="Female">Female</option>
+                          <option value="Prefer not to say">Prefer Not to Say</option>
+                      </select>
+                  </div>
+              </div>
+          
+              <div class="text-center mt-3 mb-3">
+                  <button class="btn btn-primary signup-btn" type="submit">SignUp</button>
+              </div>
+          
+              <p class="login-p"> Have an account?<a class="login-btn" href="/login"> Login!</a></p>
+          </form>
+          
+        </div>
+    </div>
+    </main>
+    <% if(alertMessage) { %>
+      <script>
+        alert("<%= alertMessage %>")
+      </script>
+    <% } %>
+    
+<%- include('../includes/end.ejs') %>

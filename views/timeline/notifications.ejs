@@ -1,0 +1,43 @@
+<%- include('../includes/start.ejs') %>
+<link href="/css/notification.css" rel="stylesheet">
+
+
+    <main>
+<% if(friends.length>0){ %>
+
+<div class="centerDiv ">
+    <div class="card text-center mt-2 ms-5">
+    <div class="card-header">
+      Friend Requests
+    </div>
+    <% friends.forEach(friend=>{ %>
+        <div class="col-sm-12 mt-2">
+            <div class="card">
+              <div class="card-body p-2">
+                      <img src="<%= friend.imagePath %>" class="rounded-image" width="70px"> 
+                      <h5 class="card-title ms-2 mt-4"><%= friend.firstName %> <%= friend.lastName %></h5>
+                  
+                <p class="card-text"><%= friend.description %></p>
+                <form method="post" action="/accept-friend">
+                  <input type="hidden" name="userId" value="<%= friend._id %>">
+                  <div class="d-flex justify-content-center">
+                    <button type="submit" name="btnValue" value="accept" class="btn btn-success ">Accept</button>
+                    <button type="submit" name="btnValue" value="reject" class="btn btn-danger ms-2">Reject</button>
+
+                  </div>
+              </form>
+              </div>
+            </div>
+          </div>
+    <% }) %>
+    </div>
+</div>
+  <% }  else{ %>
+    
+
+    <h2 class="no-notifications-message">No new Notifications</h2>
+
+    <% } %>
+
+    </main>
+<%- include('../includes/end.ejs') %>

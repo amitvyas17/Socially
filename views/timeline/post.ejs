@@ -1,0 +1,198 @@
+<%- include('../includes/start.ejs' ) %>
+
+  <% if(message) {%>
+    <h1>
+      <%= message %>
+    </h1>
+    <% } else{ %>
+
+
+          <main>
+            <div class="centerDiv  mt-1 mb-3">
+              <div class="container mt-5 mb-2 ">
+                <div class="row justify-content-center">
+                  <div class="col-md-12 main-content">
+                    <!-- Create Post Form -->
+                    <div class="card mb-3">
+                      <div class="card-body add-post">
+                        <form action="/post" method="post">
+                          <div class="row">
+                            <div class="col-md-1">
+                              <img src="<%= userPic %>" class="rounded-image mt-3" width="50px" height="50px">
+                            </div>
+                            <div class="col-md-11">
+                              <div class="form-group ms-2">
+                                <textarea class="form-control" name="postText" rows="3"
+                                  placeholder="What's on your mind?"></textarea>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-11 offset-md-1 mt-3">
+                              <div class="form-group mt-1">
+                                <label for="postImage">Add a photo:</label>
+                                <input type="text" class="form-control-file" placeholder="Image Url" id="postImage"
+                                  name="postImage">
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-12 text-end">
+                              <button type="submit" class="btn btn-primary">Post</button>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+
+                    
+
+
+                    <!-- Display Posts (You can loop through posts from your database here) -->
+                    <!-- Facebook Post -->
+                    <% let postsFound = false; %>
+                    <% if(posts.length>0){ %>
+                      <% posts.forEach(post=>{ %>
+                        <% if(post.isCreatedBySessionUser || post.isCreatedByFriend){ %>
+                        <div class="card mb-2 mt-4">
+                          <!-- Post Header (User Profile) -->
+
+                          <div class="card-header">
+
+                            <div class="media d-flex">
+
+                              <!-- <img src="profile-image.jpg" alt="Profile Picture" class="mr-3 rounded-circle" width="50"> -->
+                              <div class=" mt-1 ">
+                                <div class="headingDiv">
+                                  <h5 class="mt-0">
+                                    <%=post.userId.firstName%>
+                                    <%=post.userId.lastName%>
+
+                                  </h5>
+                                  <p class="text-muted">
+                                    <% 
+                                    const postDate = new Date(post.createdAt);
+                                    const currentDate = new Date();
+                                    
+                                    // Check if the post was created on the same day
+                                    if (postDate.toDateString() === currentDate.toDateString()) {
+                                        const timeDifference = Math.floor((currentDate - postDate) / (60 * 1000)); // in minutes
+                                        const formattedTime = timeDifference < 60
+                                            ? `${timeDifference} minutes ago`
+                                            : `${Math.floor(timeDifference / 60)} hours ago`;
+                    
+                                        %> <%= formattedTime %> <% 
+                                    } else {
+                                        // If the post is older, display the full date and time in the local time zone
+                                        const options = {  year: 'numeric', month: 'long', day: 'numeric'};
+                                        const formattedDate = postDate.toLocaleDateString('en-US', options);
+                                        
+                                        %> <%= formattedDate %> <% 
+                                    }
+                                %>
+                                  </p>
+                                </div>
+
+                              </div>
+                              <form method="POST" action="/delete-post">
+                                <button type="submit" class="deleteButton">
+                                  <input type="hidden" name="userId" value="<%=post.userId._id%>">
+                                  <input type="hidden" name="postId" value="<%=post._id%>">
+                                  <div class="deleteDiv">
+                                    <i class="fa-solid fa-trash"></i>
+                                  </div>
+                                </button>
+                              </form>
+
+                            </div>
+                          </div>
+
+                          <!-- Post Content -->
+
+                          <div class="card-body ">
+                            <p class="card-text">
+                              <%=post.postText%>
+                            </p>
+                            <div class="uploadImage ms-3">
+                              <img src="<%=post.postImage%>" alt="Post Image" class="img-fluid ms-5" width="400px">
+                            </div>
+                          </div>
+
+                          <!-- Post Footer (Like, Comment, Share Buttons) -->
+                          <div class="card-footer">
+                            <div class="d-flex align-items-center">
+                              <p class="me-2">Likes:<%=post.likes %>
+                              </p>
+                              <p>Comments:
+                                <% if (post.comments.length) { %>
+                                  <%= post.comments.length %>
+                                    <% } else { %>
+                                     0
+                                      <% } %>
+                              </p>
+                            </div>
+                            <div class="d-flex">
+                              <% if(post.isLikedByUser){ %>
+                                <form method="POST" action="/dislike-post">
+                                  <input type="hidden" name="postId" value="<%=post._id%>">
+                                  <input type="hidden" name="redirectPage" value="/timeline">
+                                  <button id="likeBtn" type="submit"
+                                    class="me-1 liked btn-lg  btn-icon btn-transparent"><i
+                                      class="fas like-icon fa-heart"></i></button>
+                                </form>
+                                <% } else { %>
+                                  <form method="POST" action="/like-post">
+                                    <input type="hidden" name="postId" value="<%=post._id%>">
+                                    <input type="hidden" name="redirectPage" value="/timeline">
+                                    <button id="dislikeBtn" type="submit"
+                                      class="me-1 btn-lg   btn-icon btn-transparent"><i
+                                        class="far fa-heart"></i></button>
+                                  </form>
+                                  <% } %>
+                                    <a href="/post-view/<%=post._id%>" class="me-1 btn-lg btn-icon btn-transparent"><i
+                                        class="far fa-comment"></i></a>
+                                    <% if(post.isSavedByUser){ %>
+                                      <form action="/remove-save-post" method="POST">
+                                        <input type="hidden" name="postId" value="<%=post._id%>">
+                                        <input type="hidden" name="redirectPage" value="/timeline">
+                                        <button type="submit"
+                                          class="me-1 btn-lg btn-lg saved btn-icon btn-transparent"><i
+                                            class="fas fa-bookmark"></i></button>
+                                      </form>
+                                      <% } else { %>
+                                        <form action="/save-post" method="POST">
+                                          <input type="hidden" name="postId" value="<%=post._id%>">
+                                          <input type="hidden" name="redirectPage" value="/timeline"> 
+                                          <button type="submit" class="me-1 btn-lg btn-icon btn-transparent"><i
+                                              class="far fa-bookmark"></i></button>
+                                        </form>
+                                        <% } %>
+
+                            </div>
+                           
+
+                          </div>
+
+
+                        </div>
+                        <% postsFound = true; %>
+
+                        <% }%>
+                        <%})%>
+
+                          <% if (!postsFound) { %>
+                            <h1>No post Found</h1>
+                          <% } %>
+                          <% }%>
+                            
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        </main>
+      </div>
+      </div>
+
+      <% } %>
+        <%- include('../includes/end.ejs') %>

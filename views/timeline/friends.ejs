@@ -1,0 +1,40 @@
+<%- include('../includes/start.ejs') %>
+<link href="/css/friends.css" rel="stylesheet">
+
+    <main>
+<% if(friends.length>0){ %>
+    
+
+    <div class="centerDiv">
+        <div class="row">
+      <% friends.forEach(f=>{ %>
+          
+            <div class="col-sm-6 mt-2">
+              <div class="card">
+                <div class="card-body p-2">
+                    <div class="d-flex">
+                        <img src="<%= f.friend.imagePath %>" class="rounded-image" width="70px"> 
+                        <h5 class="card-title ms-2 mt-4"><%= f.friend.firstName %> <%= f.friend.lastName %></h5>
+                    </div>
+                  <div class="d-flex remove-friend-div">
+                  <p class="card-text"><%= f.friend.description %></p>
+                  <form method="post" action="/remove-friend">
+                    <input type="hidden" name="userId" value="<%= f.friend._id %>">
+                    <button type="submit" class="borderless-btn "><i class="fa-solid fa-user-minus"></i></button>
+                </form>
+              </div>
+                </div>
+              </div>
+            </div>
+<% }) %>
+
+          </div>
+        </div>
+    <% } else{%>
+            <h3>You Have No Friends!!!</h3>
+        <% } %>
+
+    </main>
+
+    
+<%- include('../includes/end.ejs') %>

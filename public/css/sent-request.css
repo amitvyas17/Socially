@@ -1,0 +1,28 @@
+.card-main{
+    width: 33rem;
+    /* padding-left: 1rem; */
+    padding-right: 1rem;
+    padding-bottom: 2rem;
+    
+
+}
+.card-inside{
+   margin-left: 1rem;
+   margin-top: 1rem;
+   padding: 1rem;
+    width: 31rem;
+}
+.card-header{
+    font-size: medium;
+    font-weight: bold;
+}
+main{
+    background-color: #F5F5F5;
+    height: 100vh;
+}
+.no-requestBtn{
+    font-size: 24px;
+    color: #888;
+    text-align: center;
+    margin: 20px 0;
+}

@@ -1,0 +1,63 @@
+body {
+    background-image: url('/image/back-signup.jpeg');
+    background-size: cover;
+}
+
+/* Override the login-parent div's background to keep it unchanged */
+.signup {
+    width: 38rem;
+    height: 90vh;
+    background-color: white; /* Override the background to be transparent */
+    border-radius: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    padding: 5rem 3rem 1rem 3rem;
+}
+.signup-parent{
+    margin-bottom: 2rem;
+}
+#signup-image{
+    align-self: center;
+    margin-left: 9.2rem;
+    margin-top: -4rem;
+}
+.signup-btn{
+    font-weight: 600;
+    border: none;
+    border-radius: 40px;
+    width: 22rem;
+    background-color: #d2517130;
+    color:  black;
+}
+.signup-btn:hover{
+   
+    background-color: #FF1E57;
+    color:  white;
+}
+.signup-btn:focus{
+   
+    background-color: #FF1E57;
+    color:  white;
+}
+.input-box{
+    width: 31rem;
+    margin-bottom: 1.7rem;
+    height: 3rem;
+    border: none;
+    background-color: #FAFAFA;
+    margin-bottom: 1.5rem;
+}
+.login-btn{
+    color: #FF1E57;
+    text-decoration: none;
+
+}
+.login-btn:hover{
+    color: #FF1E57;
+}
+.login-p{
+    margin-left: 10rem;
+}
+.message{
+    margin-left: 5rem;
+    color: rgb(146, 153, 153);
+}

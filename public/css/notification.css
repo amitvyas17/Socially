@@ -1,0 +1,11 @@
+main{
+    background-color: #F5F5F5;
+    height: 100vh;
+}
+.mt-2 {
+    margin-top: 0.5rem!important;
+    padding-left: 0.6rem;
+    padding-right: 0.6rem;
+    padding-bottom: 0.6rem;
+    padding-top: 0.6rem;
+}

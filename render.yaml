@@ -1,0 +1,4 @@
+services:
+  - name: socially
+    buildCommand: npm install --production
+    startCommand: node app.js

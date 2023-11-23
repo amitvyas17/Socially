@@ -1,0 +1,276 @@
+<%- include('../includes/start.ejs') %>
+
+<% if(message) {%>
+    <h1><%= message %></h1>
+<% } else{ %>
+
+  <div class="wrapper">
+    <!-- Sidebar  -->
+    <nav id="sidebar">
+        <div class="sidebar-header">
+          <img src="/image/horizontalLogo.png" width="200px" height="200px">
+
+            <!-- <h3>Bootstrap Sidebar</h3> -->
+        </div>
+
+        <ul class="list-unstyled components">
+            <p>Dummy Heading</p>
+            <li class="active">
+                <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                <ul class="collapse list-unstyled" id="homeSubmenu">
+                    <li>
+                        <a href="#">Home 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Home 3</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">About</a>
+            </li>
+            <li>
+                <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Pages</a>
+                <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <li>
+                        <a href="#">Page 1</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 2</a>
+                    </li>
+                    <li>
+                        <a href="#">Page 3</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#">Portfolio</a>
+            </li>
+            <li>
+                <a href="#">Contact</a>
+            </li>
+        </ul>
+
+        <ul class="list-unstyled CTAs">
+            <li>
+                <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+            </li>
+            <li>
+                <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content">
+
+       <!-- <nav class="navbar navbar-expand-lg  custom-navbar-bg">
+            <div class="container-fluid">
+              <img src="/image/favicon.png" width="80px" height="70px">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active customA" aria-current="page" href="/timeline">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link customA" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle customA" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item customA" href="#">Action</a></li>
+                      <li><a class="dropdown-item customA" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item customA" href="#">Something else here</a></li>
+                      <li>
+                          <form class="d-flex" method="post" action="/logout">
+                              <button type="submit" class="customBtn customA ms-2">Logout</button>
+                          </form>
+                      </li>
+                  </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <div class="search-container me-4 mt-1">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="search-btn" type="submit">
+                      <i class="fas fa-search"></i> 
+                    </button>
+                  </div>
+                </form>
+                
+                
+                
+                
+                <% if(subBtn=='Logout') {%>
+                  <a class="mt-1 me-2 customA2 " href="/notifications">
+                    <i class="fa-solid fa-bell noti-icon" title="Notifications"></i>
+                  </a>
+                  <form class="d-flex" method="post" action="/logout">
+                    <button type="submit" class="customBtn"><%= subBtn %></button>
+                  </form>
+                  <% } else{ %>
+                <form class="d-flex">
+                  <a href="<% if(subBtn == 'Login') { %> /login  <% } else{  %> /signup <% } %>" class="btn customBtn"><%= subBtn %></a>
+                </form>
+                <% } %>
+              </div>
+            </div>
+          </nav> -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+          
+              <button type="button" id="sidebarCollapse" class="btn btn-info">
+                <i class="fas fa-align-left"></i>
+                <span>Toggle Sidebar</span>
+              </button>
+              <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+              </button>
+          
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="nav navbar-nav ml-auto">
+                  <li class="nav-item active">
+                    <a class="nav-link" href="#">Page</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Page</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="#">Page</a>
+                  </li>
+                 
+                </ul>
+              </div>
+              <% if(subBtn=='Logout') { %>
+                <li class="nav-item">
+                  <a class="mt-1 me-2 customA2 " href="/notifications">
+                    <i class="fa-solid fa-bell noti-icon" title="Notifications"></i>
+                  </a>
+                </li>
+              <% } %>
+              <% if(subBtn=='Logout') { %>
+                <form class="d-flex" method="post" action="/logout">
+                  <button type="submit" class="customBtn"><%= subBtn %></button>
+                </form>
+              <% } else { %>
+                <form class="d-flex">
+                  <a href="<% if(subBtn == 'Login') { %> /login  <% } else{  %> /signup <% } %>" class="btn customBtn"><%= subBtn %></a>
+                </form>
+              <% } %>
+          
+            </div>
+          </nav>
+          
+        <main>     
+          <div class="centerDiv  mt-1 mb-3">
+              <div class="container mt-5 mb-2 ">
+                  <div class="row justify-content-center">
+                    <div class="col-md-12">
+                      <!-- Create Post Form -->
+                      <div class="card mb-3">
+                        <div class="card-body">
+                          <form action="/post" method="post">
+                            <div class="form-group">
+                              <textarea class="form-control" name="postText" rows="3" placeholder="What's on your mind?"></textarea>
+                            </div>
+                            <div class="form-group mt-1">
+                              <label for="postImage ">Add a photo:</label>
+                              <input type="text" class="form-control-file" id="postImage" name="postImage">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Post</button>
+                          </form>
+                        </div>
+                      </div>
+                
+                      <!-- Display Posts (You can loop through posts from your database here) -->
+                      <!-- Facebook Post -->
+                      <% if(posts.length>0){ %>
+                        <% posts.forEach(post=>{ %>
+                      <div class="card mb-2 mt-4">
+                        <!-- Post Header (User Profile) -->
+                         
+                        <div class="card-header">
+                       
+                          <div class="media d-flex">
+                           
+                            <!-- <img src="profile-image.jpg" alt="Profile Picture" class="mr-3 rounded-circle" width="50"> -->
+                            <div class=" mt-1 ">
+                              <div class="headingDiv">
+                                <h5 class="mt-0"><%=post.userId.firstName%></h5>
+                                <p class="text-muted"><%=post.createdAt%></p>
+                              </div>
+                              
+                            </div>
+                            <form method="POST" action="/delete-post" >
+                            <button type="submit" class="deleteButton">
+                              <input type="hidden" name="userId" value="<%=post.userId._id%>">
+                              <input type="hidden" name="postId" value="<%=post._id%>">
+                              <div class="deleteDiv">
+                                  <i class="fa-solid fa-trash"></i>
+                              </div>
+                          </button>
+                        </form>
+                          
+                          </div>
+                        </div>
+                        
+                        <!-- Post Content -->
+                       
+                        <div class="card-body ">
+                          <p class="card-text">
+                            <%=post.postText%>
+                          </p>
+                          <div class="uploadImage ms-3">
+                          <img src="<%=post.postImage%>" alt="Post Image" class="img-fluid ms-5" width="400px">
+                        </div>
+                      </div>
+                        
+                        <!-- Post Footer (Like, Comment, Share Buttons) -->
+                        <div class="card-footer">
+                          <form method="POST" , action="/like-post">
+                            <input type="hidden" name="postId" value="<%=post._id%>">
+                            <div class="d-flex">
+                              <p class="me-2">Likes:<%=post.likes %></p>                                                    <p>Comments:
+                                <% if (post.comments.length) { %>
+                                    <%= post.comments.length %>
+                                        <% } else { %>
+                                            No Comments
+                                            <% } %>
+                            </p>
+
+                            </div>
+                            <button type="submit" class="btn btn-primary btn-sm mr-2">Like</button>
+                          </form>
+                          
+                          <a href="/post-view/<%=post._id%>" class="btn btn-primary btn-sm mr-2">Comment</a>
+                          <button class="btn btn-primary btn-sm">Share</button>
+                        </div>
+                        
+                      </div>
+                      <%})%>
+                        <% } else{%>
+                          <h1> No post Found</h1>
+                          <% } %>
+                    </div>
+                  </div>
+                </div>
+          </div>
+      </div>
+  </main>
+    </div>
+</div>
+    
+    <% } %>
+<%- include('../includes/end.ejs') %>
