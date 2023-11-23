@@ -1,4 +1,273 @@
-<%- include('../includes/start.ejs',{ loggedInUser: loggedInUser } ) %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="/css/main.css" rel="stylesheet">
+    <link href="/css/sidebar.css" rel="stylesheet">
+    <script src="/js/sidebar.js" defer></script>
+    <script src="/js/navbar.js" defer></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <title>Login Page</title>
+</head>
+<body>
+    <head>
+      
+      <div class="wrapper">
+        <!-- Sidebar  -->
+        <nav id="sidebar">
+          <div class="sidebar-menus">
+
+            <div class="sidebar-header">
+              <img src="/image/favicon.png" width="200px" height="200px">
+
+              <!-- <h3>Bootstrap Sidebar</h3> -->
+            </div>
+            <ul class="list-unstyled components">
+
+              <li>
+                <a href="/timeline">Feed</a>
+              </li>
+              <li>
+                <a href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="false"
+                  class="dropdown-toggle">
+                  Friends <i class="fas fa-chevron-down dropdown-icon"></i>
+                </a>
+                <ul class="collapse list-unstyled " id="pageSubmenu">
+                  <li>
+                    <a href="/friends">Current Friends</a>
+                  </li>
+                  <li>
+                    <a href="/friend-add">Add Friends</a>
+                  </li>
+                  <li>
+                    <a href="/sent-request">Sent Requests</a>
+                  </li>
+                </ul>
+
+              </li>
+              <li>
+                <a href="#">Saved Post</a>
+              </li>
+              <li>
+                <a href="#">User Profile</a>
+              </li>
+            </ul>
+
+            <ul class="list-unstyled CTAs">
+              <li>
+                <a href="report-issue" class="download ">Facing issues?</a>
+              </li>
+
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Page Content  -->
+        <div id="content">
+
+          <!-- <nav class="navbar navbar-expand-lg  custom-navbar-bg">
+            <div class="container-fluid">
+              <img src="/image/favicon.png" width="80px" height="70px">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active customA" aria-current="page" href="/timeline">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link customA" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle customA" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item customA" href="#">Action</a></li>
+                      <li><a class="dropdown-item customA" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item customA" href="#">Something else here</a></li>
+                      <li>
+                          <form class="d-flex" method="post" action="/logout">
+                              <button type="submit" class="customBtn customA ms-2">Logout</button>
+                          </form>
+                      </li>
+                  </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <div class="search-container me-4 mt-1">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="search-btn" type="submit">
+                      <i class="fas fa-search"></i> 
+                    </button>
+                  </div>
+                </form>
+                
+                
+                
+                
+                <% if(subBtn=='Logout') {%>
+                  <a class="mt-1 me-2 customA2 " href="/notifications">
+                    <i class="fa-solid fa-bell noti-icon" title="Notifications"></i>
+                  </a>
+                  <form class="d-flex" method="post" action="/logout">
+                    <button type="submit" class="customBtn"><%= subBtn %></button>
+                  </form>
+                  <% } else{ %>
+                <form class="d-flex">
+                  <a href="<% if(subBtn == 'Login') { %> /login  <% } else{  %> /signup <% } %>" class="btn customBtn"><%= subBtn %></a>
+                </form>
+                <% } %>
+              </div>
+            </div>
+          </nav> -->
+          <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+
+              <button type="button" id="sidebarCollapse" class="btn ">
+                <i class="fas fa-align-left"></i>
+              </button>
+              <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse"
+                data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-align-justify"></i>
+              </button>
+
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <a class="navbar-brand" href="/timeline"> <!-- Add this line -->
+                  <span class="logo-text">
+                    <span class="black-text">Soci</span>
+                    <span class="green-text me-2">ally</span>
+                  </span>
+                </a> 
+                <div class="search-container mt-1">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="search-btn" type="submit">
+                    <i class="fas fa-search"></i>
+                  </button>
+                </div>
+              </div>
+
+
+
+              <div class="nav-item">
+                <a class="mt-1 me-2 customA2 has-notification" href="/notifications">
+                  <i class="fa-solid fa-bell noti-icon" title="Notifications">
+                    <span class="notification-dot"></span>
+                  </i>
+                </a>
+              </div>
+
+              <li class="nav-item dropdown  ">
+                <a class="nav-link dropdown-toggle me-2" href="#" id="navbarDropdownMenuLink" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
+                  Hi, <%= loggedInUser %>
+                    <i class="fas fa-chevron-down dropdown-icon-user"></i>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                  <li><a class="dropdown-item customBtn " href="/user-profile">User-Profile</a></li>
+                  <li><a class="dropdown-item customBtn" href="/update-password">Change Password</a></li>
+                  <form method="post" action="/logout">
+                    <li><button type="submit" class="customBtn dropdown-item">
+                        <%= subBtn %>
+                      </button></li>
+                  </form>
+                </ul>
+              </li>
+              <!-- 
+              <div class="custom-dropdown">
+                <ul class="list-unstyled">
+                  <li>
+                  </li>
+                  <li>
+                    <a href="#">Add Friends</a>
+                  </li>
+                </ul>
+              </div>
+            
+              <div class="nav-item">
+                <a href="#pageSubmenu" role="button" data-bs-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                  Friends 
+                </a>
+              </div>
+            </form> -->
+
+            </div>
+          </nav>
+        <!-- <nav class="navbar navbar-expand-lg  custom-navbar-bg">
+            <div class="container-fluid">
+              <img src="/image/favicon.png" width="80px" height="70px">
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active customA" aria-current="page" href="/timeline">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link customA" href="#">Link</a>
+                  </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle customA" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Dropdown
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <li><a class="dropdown-item customA" href="#">Action</a></li>
+                      <li><a class="dropdown-item customA" href="#">Another action</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item customA" href="#">Something else here</a></li>
+                      <li>
+                          <form class="d-flex" method="post" action="/logout">
+                              <button type="submit" class="customBtn customA ms-2">Logout</button>
+                          </form>
+                      </li>
+                  </ul>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <div class="search-container me-4 mt-1">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="search-btn" type="submit">
+                      <i class="fas fa-search"></i> 
+                    </button>
+                  </div>
+                </form>
+                
+                
+                
+                
+                <% if(subBtn=='Logout') {%>
+                  <a class="mt-1 me-2 customA2 " href="/notifications">
+                    <i class="fa-solid fa-bell noti-icon" title="Notifications"></i>
+                  </a>
+                  <form class="d-flex" method="post" action="/logout">
+                    <button type="submit" class="customBtn"><%= subBtn %></button>
+                  </form>
+                  <% } else{ %>
+                <form class="d-flex">
+                  <a href="<% if(subBtn == 'Login') { %> /login  <% } else{  %> /signup <% } %>" class="btn customBtn"><%= subBtn %></a>
+                </form>
+                <% } %>
+              </div>
+            </div>
+          </nav> -->
+    </head>
 
   <% if(message) {%>
     <h1>
