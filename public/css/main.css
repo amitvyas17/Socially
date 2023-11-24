@@ -213,5 +213,9 @@ font-size: x-small;
 
 }
 
-
+.custom-btn{
+   
+        border: none;
+        background-color: transparent;
+}
 

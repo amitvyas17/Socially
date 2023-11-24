@@ -5,9 +5,10 @@ const mongoose = require('mongoose')
 
 exports.getTimeline = async (req, res, next) => {
     try {
+        // console.log(req.session)
         // Step 1: Fetch posts from the database
-        const posts = await Post.find().sort({ 'posts.createdAt': 'desc' }).populate('posts.userId') || [];
-
+        const posts = await Post.find().sort({ 'posts.createdAt': 'desc' }).populate('posts.userId posts.likedBy') || [];
+       const loggedInUserInSession =  await User.findById(req.session.user._id)
         // console.log('this is post ' +posts[0].posts)
         if(posts.length>0){
         const allPosts = posts[0].posts.map(post=>{
@@ -15,15 +16,24 @@ exports.getTimeline = async (req, res, next) => {
         })
         allPosts.reverse()
         if (req.session.isLoggedin == true && posts.length > 0) {
-            // console.log(allPosts)
+            console.log(loggedInUserInSession)
+
             const likedPosts = allPosts.map(post => {
+                const postUserId = post.userId._id.toString();
                 // console.log(post)
-                const isLikedByUser = post.likedBy.some(userId => userId.toString() === req.session.user._id.toString());
+                const isLikedByUser = post.likedBy.some(userId => userId._id.toString() === req.session.user._id.toString());
                 const isSavedByUser = req.session.user.savedPosts && req.session.user.savedPosts.some(savedPostId => savedPostId.equals(post._id));
                 const isCreatedBySessionUser = post.userId._id.toString() === req.session.user._id.toString()
-                const isCreatedByFriend = req.session.user.friends && req.session.user.friends.some(friendId=>friendId.toString() === post.userId.toString())
+                const isCreatedByFriend = loggedInUserInSession.friends && loggedInUserInSession.friends.some(friend => {
+                    console.log("Friend userId:", friend.userId.toString());
+                    console.log("Post userId:", postUserId);
+                    return friend.userId.toString() === postUserId;
+                });
                 
-                return { ...post, isLikedByUser,isSavedByUser,isCreatedBySessionUser,isCreatedByFriend };
+                console.log("isCreatedByFriend:", isCreatedByFriend);
+
+                
+                return { ...post, isLikedByUser,isSavedByUser,isCreatedBySessionUser,isCreatedByFriend, };
               });
             //   console.log(req.session.user)
             //   console.log(likedPosts)
@@ -267,11 +277,7 @@ exports.postAddFriend = (req,res,next) =>{
     const friendId = req.body.userId
     User.findOneAndUpdate({_id : req.session.user},
         {
-            // $push:{
-            //     friends:{
-            //         userId:friendId,
-            //         status:'Pending'
-            //     },
+         
             $push:{
                 sentRequest:new mongoose.Types.ObjectId(friendId)
             },
@@ -389,6 +395,7 @@ exports.postAcceptFriend = async (req,res,next) =>{
                         
                     },
                     {new:true})
+                    console.log('sessionuserupdate  '+sessionUserUpdate)
             req.session.user = sessionUserUpdate
             console.log('The session user has been updated...' + req.session.user)
             res.redirect('/notifications')
@@ -404,7 +411,7 @@ exports.postAcceptFriend = async (req,res,next) =>{
                 
             },{new:true})
            
-           const sessionUserUpdate = User.findOneAndUpdate({_id : req.session.user._id},
+           const sessionUserUpdate = await User.findOneAndUpdate({_id : req.session.user._id},
                     {
                         $pull:{
                             receivedRequest:friendId
